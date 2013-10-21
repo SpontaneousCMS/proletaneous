@@ -75,7 +75,7 @@ package :dependencies do
   # to make this work we need to enable key forwarding to work when using sudo
   # see http://serverfault.com/questions/107187/sudo-su-username-while-keeping-ssh-key-forwarding
   runner "chmod -R a+wrx `dirname $SSH_AUTH_SOCK`"
-  runner "(cd #{release} && sudo -u #{opts[:user]} bash -c 'echo $SSH_AUTH_SOCK && source /usr/local/share/chruby/chruby.sh && chruby #{opts[:ruby]} && bundle install --without development --binstubs --deployment --shebang ${RUBY_ROOT}/bin/ruby')"
+  runner "(cd #{release} && sudo -u #{opts[:user]} bash -c 'echo $SSH_AUTH_SOCK && source /usr/local/share/chruby/chruby.sh && chruby #{opts[:ruby]} && bundle install --without development --binstubs --deployment --shebang ${RUBY_ROOT}/bin/ruby --path #{opts[:app_root]}/shared/bundle')"
   runner "(cd #{release} && sudo -u #{opts[:user]} ./bin/spot init --environment=production --user=postgres --create-user=false)"
   config = YAML.load_file(File.expand_path('../../../database.yml', __FILE__))[:production]
   verify do

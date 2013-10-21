@@ -3,7 +3,7 @@ package :simultaneous do
   requires :simultaneous_root, opts.merge(simultaneous_root: root)
   requires :simultaneous_install, opts.merge(simultaneous_root: root)
   requires :simultaneous_runit, opts.merge(simultaneous_root: root)
-  runner "sv restart simultaneous"
+  runner "sv restart simultaneous; /bin/true"
 end
 
 package :simultaneous_install do
@@ -35,6 +35,6 @@ package :simultaneous_runit do
   @socket = opts[:simultaneous_socket]
   file "#{service}/run", contents: render(File.expand_path("../../templates/etc/sv/simultaneous/run", __FILE__)), mode: "0755"
   file "#{log}/run", contents: File.read(File.expand_path("../../templates/sv-log-run", __FILE__)), mode: "0755"
-  runner "ln -nfs #{available}/#{name} #{enabled} && sleep 1"
+  runner "ln -nfs #{available}/#{name} #{enabled}"
 end
 
