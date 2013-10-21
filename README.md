@@ -3,11 +3,9 @@ proletaneous
 
 Provisioning of Spontaneous CMS systems using Sprinkle
 
-
 Notes:
 
 (To be expanded at some point...)
-
 
 Environment variables
 ---------------------
