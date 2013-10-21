@@ -1,0 +1,7 @@
+#!/bin/sh
+
+FILE=<%= @revision_file %>
+# This runs until the watched file changes and then exits
+# At exit runit will run the `finish` script
+# and restart the service
+exec /usr/bin/inotifywait -q -q -e close_write $FILE
